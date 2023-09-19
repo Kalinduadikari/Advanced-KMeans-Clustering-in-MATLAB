@@ -10,14 +10,14 @@ for i = 1:size(X,2)
     mu = mean(X(:,i));
     stdDev = std(X(:,i));
     % Print mean and standard deviation
-fprintf('Column %d: Mean = %f, Standard deviation = %f\n', i, mu, stdDev);
+    fprintf('Column %d: Mean = %f, Standard deviation = %f\n', i, mu, stdDev);
     % Plot histogram of column
     figure
     histogram(X(:,i))
      % Add labels and title
-xlabel('Data');
-ylabel('Frequency');
-title(sprintf('Column %d: Mean = %.2f, Std = %.2f', i, mu, stdDev));
+    xlabel('Data');
+    ylabel('Frequency');
+    title(sprintf('Column %d: Mean = %.2f, Std = %.2f', i, mu, stdDev));
 end
 % Get covariance matrix of data matrix
 C = cov(X);
@@ -38,27 +38,27 @@ for i = 1:length(K_range)
     % Compute silhouette score
     s = silhouette(X, IDX);
     % Store silhouette score
-s_all(i) = mean(s);
-% Plot silhouette scores for each cluster
-figure
-silhouette(X, IDX)
-title(sprintf('Silhouette scores for K = %d', K_range(i)))
-% Plot clusters and cluster centroids
-figure
-gscatter(X(:,1), X(:,2), IDX)
-hold on
-plot(C(:,1), C(:,2), 'kx', 'MarkerSize', 15, 'LineWidth', 3) if K_range(i) < 3
-legend(sprintf('K = %d', K_range(i)), 'Location','best')
-elseif K_range(i) == 3
-legend('Cluster 1', 'Cluster 2', 'Cluster 3', 'Centroids', 'Location', 'best') elseif K_range(i) == 4
-    legend('Cluster
-'best')
-else
-    legend('Cluster
-'Location', 'best')
+    s_all(i) = mean(s);
+    % Plot silhouette scores for each cluster
+    figure
+    silhouette(X, IDX)
+    title(sprintf('Silhouette scores for K = %d', K_range(i)))
+    % Plot clusters and cluster centroids
+    figure
+    gscatter(X(:,1), X(:,2), IDX)
+    hold on
+    plot(C(:,1), C(:,2), 'kx', 'MarkerSize', 15, 'LineWidth', 3)
+    if K_range(i) < 3
+        legend(sprintf('K = %d', K_range(i)), 'Location','best')
+    elseif K_range(i) == 3
+        legend('Cluster 1', 'Cluster 2', 'Cluster 3', 'Centroids', 'Location', 'best')
+    elseif K_range(i) == 4
+        legend('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Centroids', 'Location', 'best')
+    else
+        legend('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Cluster 5', 'Centroids', 'Location', 'best')
+    end
+    title(sprintf('K-means clustering for K = %d', K_range(i)))
 end
-1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Centroids', 'Location', 1', 'Cluster 2', 'Cluster 3', 'Cluster 4', 'Cluster 5', 'Centroids',
-title(sprintf('K-means clustering for K = %d', K_range(i))) end
 % Find index of K with highest silhouette score
 [~, idx] = max(s_all);
 % Print mean Silhouette scores for each K value
